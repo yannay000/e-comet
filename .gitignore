@@ -169,3 +169,8 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# my
+trash
+.DS_Store
+**/.DS_Store

@@ -1,0 +1,29 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.2.0
+    hooks:
+      - id: check-yaml
+        exclude: (.gitlab-ci.yml|CODEOWNERS)
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+        name: ruff
+        language: python
+        args: [--fix, --exit-non-zero-on-fix, "--config=./pyproject.toml"]
+        types: [python]
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.16.1
+    hooks:
+      - id: gitleaks
+  - repo: local
+    hooks:
+        - id: mypy
+          name: mypy
+          pass_filenames: false
+          entry: mypy
+          args: ["--config-file=./pyproject.toml", "./src"]
+          language: system
+          types: [ python ]

@@ -1,0 +1,139 @@
+[tool.poetry]
+name = "e-comet"
+version = "0.1.0"
+description = "e-comet task"
+authors = ["v.koval <yan1992@yandex.ru>"]
+readme = "README.md"
+packages = [{include = ""}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+uvicorn = "0.34.0"
+fastapi = "0.115.6"
+asyncpg = "0.30.0"
+pydantic-settings = "2.5.2"
+aiohttp = "3.11.11"
+aiochclient = "2.6.0"
+mypy = "1.9.0"
+ruff = "0.6.9"
+loguru = "0.7.2"
+
+[tool.mypy]
+ignore_missing_imports = true
+implicit_optional = true
+plugins = "pydantic.mypy"
+exclude = [
+    "sql",
+    "\\.gitlab-ci.yml",
+    "CODEOWNERS"
+]
+
+[tool.ruff]
+# Enable the pycodestyle (`E`) and Pyflakes (`F`) rules by default.
+# Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
+# McCabe complexity (`C901`) by default.
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "buck-out",
+    "dist",
+    "venv",
+    "trash",
+    ".idea",
+    "versions",
+    "front",
+    ".git",
+    "Dockerfile",
+    ".gitignore",
+    "buck-out",
+    "dist",
+    "venv",
+    ".idea",
+    ".cfg",
+    ".yaml?$",
+    ".yml",
+    ".txt",
+    ".toml",
+    ".ini",
+    ".md",
+    ".sh",
+    ".crt",
+    ".lock",
+    ".pre-commit-config.yaml"
+]
+
+# Same as Black.
+line-length = 120
+
+# Assume Python 3.10
+target-version = "py311"
+
+[tool.ruff.lint]
+# extend-select = ["I"]
+per-file-ignores = { }
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+# Allow autofix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+select = [
+    "E",
+    "F",
+    "B",
+    "W",
+    "C",
+    #"I", # путает third-party и local-folder
+    "N",
+    # "D", #---> Фактически требует полного покрытия кода док-стрингами
+    "UP", # ---> новые типы
+    "ANN", # --> типизация
+    "ASYNC",
+    #    "S",
+    #    "FBT",
+    "B",
+    "C4",
+    "T10",
+    "EXE",
+    #"ISC",
+    #"ICN",
+    "PIE",
+    "T20",
+    "PYI",
+    #    "PT",
+    "Q",
+    "RSE",
+    "SLF",
+    "SLOT",
+    "SIM",
+    "TID",
+    "TCH",
+    #    "ARG",
+    #    "PTH",
+    #    "ERA",
+    "FLY",
+    "PERF",
+    "RUF"
+]
+ignore = ["UP035", "ANN101", "ANN401", "ANN102", "RUF001", "RUF002", "RUF003", "RUF012", "TCH002", "RUF006"]
+
+[tool.ruff.lint.flake8-bugbear]
+# Allow default arguments like, e.g., `data: List[str] = fastapi.Query(None)`.
+extend-immutable-calls = ["fastapi.Depends"]
